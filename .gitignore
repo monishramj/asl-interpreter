@@ -1,4 +1,5 @@
-hand_landmarker.task
+# Mediapip specific
+*.task
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
