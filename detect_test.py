@@ -17,7 +17,30 @@ frame_result = None
 def view_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int): # type: ignore
     global frame_result 
     frame_result = result
-    # print('hand landmarker result: {}'.format(result))
+#  print('hand landmarker result: {}'.format(result) + '\n')
+
+    landmarks_data = {}
+
+    if result.hand_landmarks and len(result.hand_landmarks) > 0:
+        landmarks = result.hand_landmarks[0]
+        for i, landmark in enumerate(landmarks):
+            x = landmark.x
+            landmarks_data["x"+str(i)] = x
+
+            y = landmark.y
+            landmarks_data["y"+str(i)] = y
+
+            z = landmark.z
+            landmarks_data["z"+str(i)] = z
+
+
+    df = pd.DataFrame([landmarks_data])
+    print(df)
+                
+
+                
+    return
+
 
 def draw_pts(result, img):
     if result != None:
@@ -29,7 +52,16 @@ def draw_pts(result, img):
                 cv.circle(img, (x, y), 2, (0, 255, 255), 2)
     return
 
-options = HandLandmarkerOptions(base_options = BaseOptions(model_asset_path=model_path), running_mode = VisionRunningMode.LIVE_STREAM, result_callback=view_result, num_hands = 2, min_tracking_confidence = .6, min_hand_detection_confidence = .4)
+options = HandLandmarkerOptions(
+
+    base_options = BaseOptions(model_asset_path=model_path), 
+    running_mode = VisionRunningMode.LIVE_STREAM, 
+    result_callback=view_result, 
+    num_hands = 1, 
+    min_tracking_confidence = .7, 
+    min_hand_detection_confidence = .6
+
+)
 
 vid = cv.VideoCapture(0)
 
