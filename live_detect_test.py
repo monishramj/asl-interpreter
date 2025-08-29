@@ -89,6 +89,14 @@ with HandLandmarker.create_from_options(options) as landmarker:
         ts_ms = int(time.time() * 1000) #manual timestamp in ms
 
         landmarker.detect_async(mp_image, ts_ms)
+        
+        key = cv.waitKey(25) & 0xFF
+
+        if key == ord('a') and lastest_landmarks:
+            df = pd.DataFrame([lastest_landmarks])
+            df["label"] = "A"
+            df.to_csv("asl_data.csv", mode="a", header=False, index=False)
+            print("Saved one sample for A")
 
         draw_pts(frame_result, frame)
 
