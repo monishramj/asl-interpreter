@@ -13,29 +13,33 @@ HandLandmarkerResult = vision.HandLandmarkerResult
 VisionRunningMode = vision.RunningMode
 
 frame_result = None
+lastest_landmarks = None
 
 def view_result(result: HandLandmarkerResult, output_image: mp.Image, timestamp_ms: int): # type: ignore
     global frame_result 
     frame_result = result
-#  print('hand landmarker result: {}'.format(result) + '\n')
-
-    landmarks_data = {}
+    # print('hand landmarker result: {}'.format(result) + '\n')
 
     if result.hand_landmarks and len(result.hand_landmarks) > 0:
+        landmarks_data = {}
         landmarks = result.hand_landmarks[0]
-        for i, landmark in enumerate(landmarks):
-            x = landmark.x
-            landmarks_data["x"+str(i)] = x
 
-            y = landmark.y
-            landmarks_data["y"+str(i)] = y
+        for i, lm in enumerate(landmarks):
+            x = lm.x
+            landmarks_data[f'x{i}'] = x
 
-            z = landmark.z
-            landmarks_data["z"+str(i)] = z
+            y = lm.y
+            landmarks_data[f'y{i}'] = y
+
+            z = lm.z
+            landmarks_data[f'z{i}'] = z
+
+        lastest_landmarks = landmarks_data
 
 
-    df = pd.DataFrame([landmarks_data])
-    print(df)
+    # df = pd.DataFrame([landmarks_data])
+    
+    # print(df)
                 
 
                 
@@ -85,7 +89,7 @@ with HandLandmarker.create_from_options(options) as landmarker:
         ts_ms = int(time.time() * 1000) #manual timestamp in ms
 
         landmarker.detect_async(mp_image, ts_ms)
-        
+
         draw_pts(frame_result, frame)
 
         cv.imshow('frame', frame)
