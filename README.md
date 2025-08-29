@@ -8,8 +8,8 @@ A machine learning project to detect ASL (American Sign Language) alphabet and s
     - potential speech output
 
 ## basic setup
-- python __3.12.7__
-- other dependencies in `requirements.txt`
+- python __3.11.9__
+- '''pip install mediapipe'''
 
 > [!NOTE]
 > CURRENTLY: __detect_test.py__ is basic hand-tracking, while __gesture_test.py__ is MediaPipe's basic gesture recognition model.

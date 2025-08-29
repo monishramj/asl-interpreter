@@ -34,7 +34,7 @@ def draw_pts(result, img):
         for hand in marklist:
             for landmark in hand:
                 x = int(landmark.x * w); y = int(landmark.y * h)
-                cv.circle(img, (x, y), 2, (0, 255, 255), 2)
+                cv.circle(img, (x, y), 4, (0, 255, 255), 2)
     return
 
 options = GestureRecognizerOptions(base_options = BaseOptions(model_asset_path=model_path), running_mode = VisionRunningMode.LIVE_STREAM, result_callback=print_result)
