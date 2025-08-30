@@ -1,5 +1,6 @@
 # Mediapip specific
 *.task
+/data
 
 # Apple
 .DS_Store

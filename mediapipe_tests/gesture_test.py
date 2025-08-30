@@ -2,7 +2,7 @@ import mediapipe as mp
 import cv2 as cv 
 import time
 
-model_path = 'gesture_recognizer.task'
+model_path = 'mediapipe_models/gesture_recognizer.task'
 vision = mp.tasks.vision
 
 BaseOptions = mp.tasks.BaseOptions

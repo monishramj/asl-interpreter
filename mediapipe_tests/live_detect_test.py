@@ -3,7 +3,7 @@ import pandas as pd
 import cv2 as cv 
 import time
 
-model_path = 'hand_landmarker.task'
+model_path = 'mediapipe_models/hand_landmarker.task'
 vision = mp.tasks.vision
 
 BaseOptions = mp.tasks.BaseOptions

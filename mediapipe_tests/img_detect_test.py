@@ -1,8 +1,7 @@
 import mediapipe as mp
 import pandas as pd
-import time
 
-model_path = 'hand_landmarker.task'
+model_path = 'mediapipe_models/hand_landmarker.task'
 vision = mp.tasks.vision
 
 BaseOptions = mp.tasks.BaseOptions
